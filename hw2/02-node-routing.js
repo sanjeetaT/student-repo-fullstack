@@ -19,8 +19,13 @@ const server = http.createServer((req, res) => {
     // find the request route
     const route = new URL(req.url, `http://${req.headers.host}`).pathname;
     
+     // Home page route
+    if (route === '/') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('Node Routing Exercise');
+
     //welcome route
-    if (route === '/welcome') {
+    } else if (route === '/welcome') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end('<h1>Welcome to my website!</h1>');
      
@@ -47,8 +52,9 @@ const server = http.createServer((req, res) => {
             'Content-Type': 'text/plain',
             'Set-Cookie': 'hello=world'
         });
-        res.end('cookies… yummm');
+        res.end('cookies...yummm');
 
+    // return a 404 error for other routs
     } else {
         res.writeHead(404, { 'Content-Type': 'text/html' });
         res.end('<h1>404 - page not found</h1>');

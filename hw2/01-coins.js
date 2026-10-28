@@ -1,7 +1,11 @@
 
 /** Exercise 01 - Coins */
 
-function calculate(amount) {
+const calculateChange = function(amount) {
+    //check the if amount is negative
+    if (amount < 0) {
+        return "Error: the amount cannot be negative";
+    }
     // check the amount is greather than 100
     if (amount > 100) {
         // return the error message if the amount is too large
@@ -36,11 +40,26 @@ function calculate(amount) {
     // create an empty array
     let result = [];
     // add the number of quarter, dimes, nickles, and pennies  if greather than zero
-    if (dollars > 0) result.push(dollars + " dollars");
-    if (quarters > 0) result.push(quarters + " quarters");
-    if (dimes > 0) result.push(dimes + " dimes");
-    if (nickels > 0) result.push(nickels + " nickels");
-    if (pennies > 0) result.push(pennies + " pennies");
+    if (dollars > 0) {
+        result.push(dollars + (dollars === 1 ? " dollar" : " dollars"));
+    }
+
+    if (quarters > 0) {
+        result.push(quarters + (quarters === 1 ? " quarter" : " quarters"));
+    }
+
+    if (dimes > 0) {
+        result.push(dimes + (dimes === 1 ? " dime" : " dimes"));
+    }
+
+    if (nickels > 0) {
+        result.push(nickels + (nickels === 1 ? " nickel" : " nickels"));
+    }
+
+    if (pennies > 0) {
+        result.push(pennies + (pennies === 1 ? " penny" : " pennies"));
+    }
+  
     
     // check the weather array is empty
     if (result.length === 0) {
@@ -51,18 +70,20 @@ function calculate(amount) {
 }
 
 // Sample test cases
-console.log(calculate(4.62));
+console.log(calculateChange(4.62));
 // 4 dollars, 2 quarters, 1 dimes, 2 pennies
 
-console.log(calculate(0.16));
+console.log(calculateChange(0.16));
 // 1 dimes, 1 nickels, 1 pennies
 
-console.log(calculate(150.11));
+console.log(calculateChange(150.11));
 // Error: the number is too large
 
 // Additional test cases
-console.log(calculate(1.00));
-console.log(calculate(0.05));
-console.log(calculate(0.01));
-console.log(calculate(0));
-console.log(calculate(100));
+console.log(calculateChange(1.00));
+console.log(calculateChange(0.05));
+console.log(calculateChange(0.01));
+console.log(calculateChange(0));
+console.log(calculateChange(100));
+console.log(calculateChange(-5));
+// Error the amount couldn't be negative.
