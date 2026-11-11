@@ -12,6 +12,7 @@ const port = process.env.PORT || 5001;
 
 // For other routes, such as http://localhost:5001/other, this exercise should return a status code 404 with '404 - page not found' in html format
 
+/*
 const routes = [
   'welcome',
   'redirect',
@@ -20,15 +21,51 @@ const routes = [
   'cookie',
   'other',
 ];
+*/
+// Welcome route
+app.get('/welcome', (req, res) => {
+    res.status(200).send('<h1>Welcome to my website!</h1>');
+});
 
+// Redirect route
+app.get('/redirect', (req, res) => {
+    res.redirect(302, '/redirected');
+});
+
+// Redirected route
+app.get('/redirected', (req, res) => {
+    res.send('<h1>You have been redirected!</h1>');
+});
+
+// Cache route
+app.get('/cache', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=86400');
+    res.send('<h1>this resource was cached</h1>');
+});
+
+// Cookie route
+app.get('/cookie', (req, res) => {
+    res.cookie('hello', 'world');
+    res.type('text/plain');
+    res.send('cookies… yummm');
+});
+
+// Home route
 app.get('/', (req, res) => {
-  res.status(200);
-  res.set({ 'Content-Type': 'text/html' });
-  res.send('Express Routing Exercise');
+    res.status(200);
+    res.set({ 'Content-Type': 'text/html' });
+    res.send('Express Routing Exercise');
 });
 
-// Add your code here
+// 404 route (must be after all other routes)
+app.use((req, res) => {
+    res.status(404).send('<h1>404 - page not found</h1>');
+});
 
+// Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
+
+
+

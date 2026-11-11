@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "type-assertions": "^1.1.0"
+  }
+}
